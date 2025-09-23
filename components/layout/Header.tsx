@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Header: React.FC = () => {
   return (
@@ -23,6 +24,42 @@ const Header: React.FC = () => {
       }}>
         Next.js Development Environment
       </p>
+      
+      {/* Navigation Links */}
+      <nav style={{
+        marginTop: '1rem'
+      }}>
+        <Link href="/" style={{
+          color: 'white',
+          textDecoration: 'none',
+          margin: '0 1rem',
+          padding: '0.5rem 1rem',
+          borderRadius: '4px',
+          backgroundColor: '#555'
+        }}>
+          Home
+        </Link>
+        <Link href="/home" style={{
+          color: 'white',
+          textDecoration: 'none',
+          margin: '0 1rem',
+          padding: '0.5rem 1rem',
+          borderRadius: '4px',
+          backgroundColor: '#555'
+        }}>
+          Home Page
+        </Link>
+        <Link href="/about" style={{
+          color: 'white',
+          textDecoration: 'none',
+          margin: '0 1rem',
+          padding: '0.5rem 1rem',
+          borderRadius: '4px',
+          backgroundColor: '#555'
+        }}>
+          About
+        </Link>
+      </nav>
     </header>
   );
 };
