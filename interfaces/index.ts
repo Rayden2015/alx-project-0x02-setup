@@ -17,3 +17,8 @@ export interface ProjectInfo {
   description: string;
   author: string;
 }
+
+export interface CardProps {
+  title: string;
+  content: string;
+}
