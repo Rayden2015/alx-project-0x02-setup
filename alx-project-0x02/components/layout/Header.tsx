@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { HeaderProps } from '../../interfaces';
+import { type HeaderProps } from '@/interfaces';
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   return (
