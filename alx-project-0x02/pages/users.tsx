@@ -1,58 +1,12 @@
-import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import UserCard from '@/components/common/UserCard';
 import { type UserProps } from '@/interfaces';
 
-export default function Users() {
-  const [users, setUsers] = useState<UserProps[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+interface UsersPageProps {
+  users: UserProps[];
+}
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
-        if (!response.ok) {
-          throw new Error('Failed to fetch users');
-        }
-        const data = await response.json();
-        setUsers(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header title="ALX Project 0x02" subtitle="Next.js Setup and Basics" />
-        <main className="container mx-auto px-4 py-8">
-          <div className="flex justify-center items-center h-64">
-            <div className="text-lg text-gray-600">Loading users...</div>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header title="ALX Project 0x02" subtitle="Next.js Setup and Basics" />
-        <main className="container mx-auto px-4 py-8">
-          <div className="flex justify-center items-center h-64">
-            <div className="text-lg text-red-600">Error: {error}</div>
-          </div>
-        </main>
-      </div>
-    );
-  }
+export default function Users({ users }: UsersPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -80,4 +34,28 @@ export default function Users() {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+    if (!response.ok) {
+      throw new Error('Failed to fetch users');
+    }
+    const users = await response.json();
+
+    return {
+      props: {
+        users,
+      },
+      revalidate: 60, // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return {
+      props: {
+        users: [],
+      },
+    };
+  }
 }

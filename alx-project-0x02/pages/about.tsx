@@ -13,7 +13,7 @@ export default function About() {
           <div className="prose prose-lg max-w-none mb-8">
             <p className="text-gray-600 mb-4">
               This is the About page of our Next.js learning project. Here you can learn more about 
-              the technologies and concepts we're exploring.
+              the technologies and concepts we&apos;re exploring.
             </p>
             
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Project Overview</h2>
